@@ -36,5 +36,11 @@ public class NovaRetailPipeline {
 
         // Anonymisation des données
         Dataset<Row> anonymizedData = cleanedData.drop("customer_email");
+
+        // Tri des données
+        Dataset<Row> sortedData = anonymizedData.sort(
+                col("country").asc(),
+                col("purchase_amount").desc()
+        );
     }
 }
