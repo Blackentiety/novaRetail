@@ -25,5 +25,8 @@ public class NovaRetailPipeline {
         System.out.println("============================================");
         System.out.println("CONNEXION DB NOVARETAIL_LEGACY");
         System.out.println("============================================");
+
+        // Lecture de la table customer_transactions
+        Dataset<Row> rawData = spark.read().jdbc(url, "customer_transactions", connectionProp);
     }
 }
