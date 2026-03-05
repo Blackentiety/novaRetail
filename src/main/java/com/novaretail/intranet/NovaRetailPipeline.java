@@ -6,6 +6,8 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Properties;
 
+import static org.apache.spark.sql.functions.col;
+
 public class NovaRetailPipeline {
     public static void main(String[] args){
         SparkSession spark = SparkSession.builder()
@@ -28,5 +30,8 @@ public class NovaRetailPipeline {
 
         // Lecture de la table customer_transactions
         Dataset<Row> rawData = spark.read().jdbc(url, "customer_transactions", connectionProp);
+
+        // Nettoyage des données
+        Dataset<Row> cleanedData = rawData.filter(col("country").isNotNull());
     }
 }
