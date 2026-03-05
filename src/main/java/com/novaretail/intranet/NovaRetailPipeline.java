@@ -42,5 +42,14 @@ public class NovaRetailPipeline {
                 col("country").asc(),
                 col("purchase_amount").desc()
         );
+
+        // Export des données
+        sortedData.write()
+                .mode("overwrite")
+                .partitionBy("country")
+                .json("output/data_lake/transactions_archive");
+
+        System.out.println("Pipeline terminé avec succès !");
+        spark.stop();
     }
 }
